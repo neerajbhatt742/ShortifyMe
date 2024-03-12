@@ -2,6 +2,6 @@ package com.neeraj.shortify.me.common.interfaces;
 
 import java.util.List;
 
-public interface IFetcher<T> {
-    public void apply(IContext<T> context);
+public interface IContext<T> {
+    List<T> getData();
 }
