@@ -25,7 +25,7 @@ public class ShortUrlController {
     FetchSavedUrl fetchSavedUrl;
 
     @Autowired
-    IContextCreator<SavedUrls> savedUrlsIContextCreator;
+    IContextCreator<SavedUrls> shortUrlContextCreator;
 
     @GetMapping("/findall")
     public ResponseEntity<String> getUrls(){
@@ -34,9 +34,10 @@ public class ShortUrlController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<List<SavedUrls>> shortUrl(@RequestBody SaveUrlReqBody saveUrlReqBody){
+    public ResponseEntity<Object> shortUrl(@RequestBody SaveUrlReqBody saveUrlReqBody){
         IContext<SavedUrls> context = new ShortUrlContext();
-        IResponse<SavedUrls> response = savedUrlsIContextCreator.apply(context);
-        return new ResponseEntity<>(context.getData(), response.getResponseStatus());
+        context.setRequest(saveUrlReqBody);
+        IResponse<SavedUrls> response = shortUrlContextCreator.apply(context);
+        return new ResponseEntity<>(response.getData(), response.getResponseStatus());
     }
 }

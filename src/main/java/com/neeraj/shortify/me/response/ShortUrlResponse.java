@@ -2,16 +2,15 @@ package com.neeraj.shortify.me.response;
 
 import com.neeraj.shortify.me.common.interfaces.IResponse;
 import com.neeraj.shortify.me.model.SavedUrls;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @Builder
 public class ShortUrlResponse implements IResponse<SavedUrls> {
-    private String shortUrl;
+    private SavedUrls data;
     private HttpStatus responseStatus;
     ShortUrlResponse(){
         responseStatus = HttpStatus.CREATED;
