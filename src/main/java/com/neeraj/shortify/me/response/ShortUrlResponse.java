@@ -1,7 +1,8 @@
 package com.neeraj.shortify.me.response;
 
 import com.neeraj.shortify.me.common.interfaces.IResponse;
-import com.neeraj.shortify.me.model.SavedUrls;
+import com.neeraj.shortify.me.dto.SavedUrlDto;
+import com.neeraj.shortify.me.model.ShortUrl;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 
@@ -9,9 +10,10 @@ import org.springframework.http.HttpStatus;
 @Setter
 @AllArgsConstructor
 @Builder
-public class ShortUrlResponse implements IResponse<SavedUrls> {
-    private SavedUrls data;
+public class ShortUrlResponse implements IResponse<ShortUrl> {
+    private SavedUrlDto data;
     private HttpStatus responseStatus;
+    private String message;
     ShortUrlResponse(){
         responseStatus = HttpStatus.CREATED;
     }

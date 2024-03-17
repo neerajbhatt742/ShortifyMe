@@ -3,10 +3,8 @@ package com.neeraj.shortify.me.common.impl;
 import com.neeraj.shortify.me.common.interfaces.IContextCreator;
 import com.neeraj.shortify.me.common.interfaces.IFetcher;
 import com.neeraj.shortify.me.common.interfaces.IMapper;
-import com.neeraj.shortify.me.common.interfaces.IResponse;
-import com.neeraj.shortify.me.model.SavedUrls;
+import com.neeraj.shortify.me.model.ShortUrl;
 import com.neeraj.shortify.me.response.ShortUrlResponse;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +15,20 @@ import java.util.List;
 @Getter
 @Setter
 @Component
-public class ShortUrlContextCreator implements IContextCreator<SavedUrls> {
+public class ShortUrlContextCreator implements IContextCreator<ShortUrl> {
 
     @Autowired
-    IFetcher<SavedUrls> fetchSavedUrl;
+    IFetcher<ShortUrl> fetchSavedUrl;
     @Autowired
-    IMapper<SavedUrls, ShortUrlResponse> mapToShortUrl;
+    IMapper<ShortUrl, ShortUrlResponse> mapToShortUrl;
 
     @Override
-    public List<IFetcher<SavedUrls>> getFetchers() {
+    public List<IFetcher<ShortUrl>> getFetchers() {
         return List.of(fetchSavedUrl);
     }
 
     @Override
-    public IMapper<SavedUrls, ShortUrlResponse> getMapper() {
+    public IMapper<ShortUrl, ShortUrlResponse> getMapper() {
         return mapToShortUrl;
     }
 }

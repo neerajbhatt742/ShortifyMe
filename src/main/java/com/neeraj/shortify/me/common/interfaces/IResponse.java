@@ -7,4 +7,5 @@ import java.util.List;
 public interface IResponse<T> {
     public HttpStatus getResponseStatus();
     public Object getData();
+    public String getMessage();
 }

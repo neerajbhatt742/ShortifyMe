@@ -10,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class SavedUrls {
+public class ShortUrl {
 
     @Id
     @GeneratedValue(generator = "sequence-generator")
@@ -32,13 +32,19 @@ public class SavedUrls {
                     @Parameter(name = "increment_size", value = "1")
             }
     )
-    private Long Id;
+    private Long id;
 
     @Column(name = "SHORT_ID")
     String shortId;
     @Column(name = "REDIRECT_URL")
     String redirectUrl;
     @Column(name = "VISIT_HISTORY")
-    List<Timestamp> visitHistory;
+    List<LocalDateTime> visitHistory;
+
+    @Column(name = "CREATED_ON")
+    LocalDateTime createdOn;
+
+    @Column(name = "EXPIRES_ON")
+    LocalDateTime expiresOn;
 
 }

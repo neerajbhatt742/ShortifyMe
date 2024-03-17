@@ -6,7 +6,7 @@ import com.neeraj.shortify.me.common.interfaces.IContext;
 import com.neeraj.shortify.me.common.interfaces.IContextCreator;
 import com.neeraj.shortify.me.common.interfaces.IResponse;
 import com.neeraj.shortify.me.fetcher.FetchSavedUrl;
-import com.neeraj.shortify.me.model.SavedUrls;
+import com.neeraj.shortify.me.model.ShortUrl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,17 +15,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 @Controller
-@RequestMapping("/urls")
+@RequestMapping("/api/v1")
 public class ShortUrlController {
 
     @Autowired
     FetchSavedUrl fetchSavedUrl;
 
     @Autowired
-    IContextCreator<SavedUrls> shortUrlContextCreator;
+    IContextCreator<ShortUrl> shortUrlContextCreator;
 
     @GetMapping("/findall")
     public ResponseEntity<String> getUrls(){
@@ -33,11 +31,11 @@ public class ShortUrlController {
         return ResponseEntity.ok("checking");
     }
 
-    @PostMapping("/")
+    @PostMapping("/generate")
     public ResponseEntity<Object> shortUrl(@RequestBody SaveUrlReqBody saveUrlReqBody){
-        IContext<SavedUrls> context = new ShortUrlContext();
+        IContext<ShortUrl> context = new ShortUrlContext();
         context.setRequest(saveUrlReqBody);
-        IResponse<SavedUrls> response = shortUrlContextCreator.apply(context);
+        IResponse<ShortUrl> response = shortUrlContextCreator.apply(context);
         return new ResponseEntity<>(response.getData(), response.getResponseStatus());
     }
 }
